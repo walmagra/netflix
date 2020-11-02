@@ -1,9 +1,9 @@
 {
     "result" :{
        "SSOMedium": "",
-        "portal": "cwf_em",
+        "portal": "5cceceac18d46410f877e28da649074d",
         "debug": "true",
-        "src": "https://k8s0116595-node1.thunder.lab3.service-now.com/cwf_em",
+        "src": "https://k8s0116595-node1.thunder.lab3.service-now.com/5cceceac18d46410f877e28da649074d",
         "icon": "https://icon-icons.com/icons2/1495/PNG/72/1deepinlauncher_103114.png"
     }
 }
