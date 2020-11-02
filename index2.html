@@ -1,0 +1,103 @@
+  
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+         body {
+            background-color: #f4f4f4;
+            font-size: 18px;
+            padding-left: 15px;
+        }
+        .logInStatus{
+            color: blue;
+        } 
+        .logInStatus .hidden{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1> Project Bolt ! </h1>  
+    <a id="login" href="https://dev-914990.okta.com/oauth2/v1/authorize?client_id=0oar35eu69MaV2OsE4x6&redirect_uri=http://127.0.0.1:5500/tokensuccess.html&state=1&scope=openid offline_access email&response_type=code id_token&response_mode=fragment&nonce=3ud9rzze0gf">Login with Okta</a> 
+    <a id="logout" href="" onclick="logout()">Logout</a>
+    <div id="guest">
+        Hi Guest.</div>
+    <div id="user">
+        Hello User!!!
+    </div>
+    <p> This is 3rd party appliation which is embedding servicenow messenger<b>(localhost here)</b></p>    
+    <p> External portal need to put just one script in their html <code>sp_main_widget.js</code></p>
+    <p> Exposed <code>snEmbedWidget</code> object to window which have api to control embeddable</p>
+    
+    <p>P.S. To Start the server run <code>npm install</code> and then <code>npm run start</code> from project folder in terminal. Thanks!!!</p>
+
+    <a href="http://127.0.0.1:5500/index2.html">Navigate to Page 2!</a>
+    <script>
+        window.addEventListener("load", ()=>{
+            var params = window.location.hash.substring(1).split("&");		
+		    if(params[0].indexOf('id_token') != "-1"){
+                loginDone();
+			    var x = document.getElementById("login");
+			    x.style.display = "none";
+    			var y = document.getElementById("logout");
+	    		y.style.display = "block";	
+		    	var gst = document.getElementById("guest");
+			    gst.style.display = "none";	
+    			var usr = document.getElementById("user");
+	    		usr.style.display = "block";			
+		    }
+    		else {
+	    		var x = document.getElementById("login");
+		    	x.style.display = "block";
+			    var y = document.getElementById("logout");
+    			y.style.display = "none";			
+	    		var gst = document.getElementById("guest");
+		    	gst.style.display = "block";	
+			    var usr = document.getElementById("user");
+			    usr.style.display = "none";					
+		    }
+        });
+    </script>
+
+  
+    <script src="js/sp_main_widget.js"></script>
+    <script>        
+			
+        //OIDC	
+        snEmbedWidget.init({
+            context: "",
+            moduleID: "csmconfext1#12345",
+            getToken: getIDToken
+        });
+
+        //SAML
+        // snEmbedWidget.init({
+        //     context: "",
+        //     moduleID: "csmconfinst1#12347"
+        // });
+        
+
+        function logout(){
+            snEmbedWidget.onLogout();
+        }
+        function loginDone(){
+            snEmbedWidget.onLogin();			
+        }
+                
+        function getIDToken(){
+            let params = window.location.hash.substring(1).split("&");
+            let idToken = params[0].split("=")[1];
+            return Promise.resolve(idToken);
+        }
+    </script>        
+  
+</body>
+
+</html>
