@@ -1,6 +1,6 @@
 {
     "SSOMedium": "",
-    "portal": "cwf_em"
+    "portal": "cwf_em",
     "debug": "true",
     "src": "https://k8s0110792-node1.thunder.lab3.service-now.com/cwf_em"
 }
